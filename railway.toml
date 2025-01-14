@@ -1,0 +1,8 @@
+[build]
+builder= "dockerFile"
+dockerfilePath= "./ApiDeployReservas/Dockerfile"
+
+[deploy]
+startCommand = "./ApiDeployReservas"
+restartPolicy = "always"
+healthCheckPath = "/health"
