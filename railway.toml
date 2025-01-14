@@ -3,6 +3,6 @@ builder= "dockerFile"
 dockerfilePath= "./Dockerfile"
 
 [deploy]
-startCommand = "./ApiDeployReservas"
+startCommand = "dotnet ApiDeployReservas.dll"
 restartPolicy = "always"
 healthCheckPath = "/health"
