@@ -1,6 +1,6 @@
 [build]
 builder= "dockerFile"
-dockerfilePath= "./ApiDeployReservas/Dockerfile"
+dockerfilePath= "./Dockerfile"
 
 [deploy]
 startCommand = "./ApiDeployReservas"
