@@ -25,6 +25,7 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins("https://deploy-vercer-front-qxswtvoch-sebastians-projects-cdbb03df.vercel.app")  // Cambia por la URL real de tu frontend
               .AllowAnyMethod()
+              .AllowCredentials() // Permitir cookies y autenticación basada en credenciales
               .AllowAnyHeader();
     });
 });
