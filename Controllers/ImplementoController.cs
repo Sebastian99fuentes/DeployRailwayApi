@@ -28,7 +28,7 @@ namespace ApiDeployReservas.Controllers
         }
 
         [HttpGet ("GetAll-implemento")]
-         [Authorize]
+         
         public async Task<IActionResult> GetAll ()
         {
             var implemento = await _implementoRepository.GetallAsync();
@@ -39,7 +39,7 @@ namespace ApiDeployReservas.Controllers
         }
 
         [HttpGet("ById-implemento/{id:guid}")]
-         [Authorize]
+       
         public async Task<IActionResult> GetById ([FromRoute] Guid id)
         {
             var implemento = await _implementoRepository.GetByIdAsync(id);
@@ -54,7 +54,7 @@ namespace ApiDeployReservas.Controllers
         }
 
         [HttpPost("create-implemento")]
-         [Authorize]
+        
         public async Task<IActionResult> Create ([FromBody] CreateImplementoRequestDto implementoDto)
         {
             // if(!ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace ApiDeployReservas.Controllers
         }
 
         [HttpPut]
-         [Authorize]
+         
         [Route("Update-implemento/{id:guid}")]
 
         public async Task<IActionResult> Update ([FromRoute] Guid id, [FromBody] CreateImplementoRequestDto Implemento)
@@ -87,7 +87,7 @@ namespace ApiDeployReservas.Controllers
 
         
         [HttpPut]
-         [Authorize]
+        
         [Route("Update-implementoCantidad/{id:guid}")]
         public async Task<IActionResult> UpdateCantidad ([FromRoute] Guid id, [FromBody] UpdateImpleCantidadDto Updown)
         {
@@ -104,7 +104,7 @@ namespace ApiDeployReservas.Controllers
 
 
         [HttpDelete]
-         [Authorize]
+       
         [Route("Delete-implemento/{id:guid}")] 
 
         public async Task<IActionResult> Delete ([FromRoute] Guid id)

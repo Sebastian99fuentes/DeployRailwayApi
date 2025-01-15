@@ -20,7 +20,7 @@ namespace ApiDeployReservas.Controllers
             _reservaImplementoRepository = reservaImplementoRepository;
         }
           [HttpGet("all-reservaImplemento/{id:guid}")]
-           [Authorize]
+         
         public async Task<IActionResult> GetAll([FromRoute] Guid id)
         {
             var reserva = await _reservaImplementoRepository.GetAllAsync(id);
@@ -35,7 +35,7 @@ namespace ApiDeployReservas.Controllers
         } 
 
          [HttpGet("all-reservaImplementoUser/{id:guid}")]
-          [Authorize]
+        
         public async Task<IActionResult> GetAllByUser([FromRoute] Guid id)
         {
             var reserva = await _reservaImplementoRepository.GetAllByUserAsync(id);
@@ -49,7 +49,7 @@ namespace ApiDeployReservas.Controllers
         } 
 
       [HttpPost ("Create-reservaImplemento")]
-       [Authorize]
+     
         public async Task<IActionResult> Create(CreateReservaImplementoRequestDto reservaDto)
         {
 
@@ -71,7 +71,7 @@ namespace ApiDeployReservas.Controllers
         } 
 
           [HttpGet("GetById-reservaImplemento/{Id:guid}")]
-           [Authorize]
+      
         public async Task<IActionResult> GetById([FromRoute] Guid Id)
         {
             var reserva = await _reservaImplementoRepository.GetByIdAsync(Id);
@@ -86,7 +86,7 @@ namespace ApiDeployReservas.Controllers
         }
 
          [HttpDelete]
-          [Authorize]
+          
         [Route("delete-reservaImplemento/{id:guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
