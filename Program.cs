@@ -18,15 +18,17 @@ builder.WebHost.UseUrls($"http://*:{port}");
 builder.Services.AddHealthChecks();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://deploy-vercer-front-qxswtvoch-sebastians-projects-cdbb03df.vercel.app")  // Cambia por la URL real de tu frontend
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
 });
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(option =>
 {
@@ -132,9 +134,9 @@ if (app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
+app.UseHttpsRedirection();
 
-
-app.UseCors("AllowAll");
+app.UseCors("AllowFrontend");
 ///Useers
 app.UseAuthentication();
 app.UseAuthorization();
