@@ -86,7 +86,7 @@ namespace ApiDeployReservas.Repository
             
               existingArea.Nombre =  areaDto.Nombre;
              existingArea.Descripcion = areaDto.Descripcion;
-             existingArea.Ubicacion = areaDto.Descripcion; 
+             existingArea.Ubicacion = areaDto.Ubicacion; 
 
               await  _context.SaveChangesAsync();
 
