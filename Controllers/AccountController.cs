@@ -57,24 +57,23 @@ namespace ApiDeployReservas.Controllers
         public async Task<IActionResult> Register ([FromBody] RegisterDto register)
         {
 
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState); 
+
+               var user = await _UserMananger.Users.FirstOrDefaultAsync(U => U.UserName == register.Username.ToLower());
+               if (user == null) return Unauthorized("El nombre de usuario ya esta en uso!");
+
+            var Email = await _UserMananger.Users.FirstOrDefaultAsync(U => U.UserName == register.Email.ToLower());
+            if (Email == null) return Unauthorized("Este correo ya  esta en uso!");
+
             try
             {
-                 if(!ModelState.IsValid)
-                    return BadRequest(ModelState);
-
-   
 
                 var appUser = new AppUser
                 {
                     UserName = register.Username,
                     Email = register.Email
                 };
-                var user = await _UserMananger.Users.FirstOrDefaultAsync(U => U.UserName == appUser.UserName.ToLower());
-                if (user == null) return Unauthorized("El nombre de usuario ya esta en uso!");
-
-                var Email = await _UserMananger.Users.FirstOrDefaultAsync(U => U.UserName == appUser.Email.ToLower());
-                if (Email == null) return Unauthorized("Este correo ya  esta en uso!");
-
 
                 var createdUser = await _UserMananger.CreateAsync(appUser,register.Password);
 
