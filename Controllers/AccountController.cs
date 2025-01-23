@@ -58,13 +58,13 @@ namespace ApiDeployReservas.Controllers
         {
 
             if (!ModelState.IsValid)
-                return BadRequest(ModelState); 
+                return BadRequest(ModelState);
 
-               var user = await _UserMananger.Users.FirstOrDefaultAsync(U => U.UserName == register.Username.ToLower());
-               if (user == null) return Unauthorized("El nombre de usuario ya esta en uso!");
+            var user = await _UserMananger.Users.FirstOrDefaultAsync(U => U.UserName == register.Username.ToLower());
+            if (user != null) return BadRequest("El nombre de usuario ya está en uso!");
 
-            var Email = await _UserMananger.Users.FirstOrDefaultAsync(U => U.UserName == register.Email.ToLower());
-            if (Email == null) return Unauthorized("Este correo ya  esta en uso!");
+            var email = await _UserMananger.Users.FirstOrDefaultAsync(U => U.Email.ToLower() == register.Email.ToLower());
+            if (email != null) return BadRequest("Este correo ya está en uso!");
 
             try
             {
