@@ -37,11 +37,11 @@ namespace ApiDeployReservas.Controllers
                 return BadRequest(ModelState);
             
          var user = await _UserMananger.Users.FirstOrDefaultAsync( U => U.UserName == loginDto.Username.ToLower());
-         if(user == null) return Unauthorized("Invalid username!");
+         if(user == null) return Unauthorized("Usuario Invalido!");
 
          var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-         if(!result.Succeeded) return Unauthorized("Username not found or password incorect");
+         if(!result.Succeeded) return Unauthorized("Usuario o contraseña incorrecta");
 
          return Ok(
             new NewUserDto
@@ -62,11 +62,19 @@ namespace ApiDeployReservas.Controllers
                  if(!ModelState.IsValid)
                     return BadRequest(ModelState);
 
+   
+
                 var appUser = new AppUser
                 {
                     UserName = register.Username,
                     Email = register.Email
                 };
+                var user = await _UserMananger.Users.FirstOrDefaultAsync(U => U.UserName == appUser.UserName.ToLower());
+                if (user == null) return Unauthorized("El nombre de usuario ya esta en uso!");
+
+                var Email = await _UserMananger.Users.FirstOrDefaultAsync(U => U.UserName == appUser.Email.ToLower());
+                if (Email == null) return Unauthorized("Este correo ya  esta en uso!");
+
 
                 var createdUser = await _UserMananger.CreateAsync(appUser,register.Password);
 
@@ -79,8 +87,8 @@ namespace ApiDeployReservas.Controllers
                             new NewUserDto
                             {
                                     UserName = appUser.UserName,
-                                    Email = appUser.Email,
-                                    Token =  _tokenService.CreateToken(appUser)
+                                    Email = appUser.Email,    
+                                Token =  _tokenService.CreateToken(appUser)
 
                             }
                         );

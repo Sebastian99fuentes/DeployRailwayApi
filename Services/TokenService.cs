@@ -24,8 +24,8 @@ namespace ApiDeployReservas.Services
         {
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
-            Issuer_ = _config["Jwt:Issuer"] ?? "defaultIssuer";
-            Audience_ = _config["Jwt:Audience"] ?? "defaultAudience";
+            Issuer_ = _config["Jwt:Issuer"] ;
+            Audience_ = _config["Jwt:Audience"];
         }
 
        public string CreateToken(AppUser user)
