@@ -28,7 +28,7 @@ namespace ApiDeployReservas.Controllers
 
 
         [HttpGet("GetAll-areas")]
-        
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
 
@@ -40,8 +40,7 @@ namespace ApiDeployReservas.Controllers
         }
 
         [HttpGet("GetById-areas{id:guid}")]
-
-        
+        [Authorize]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var area = await _areaRepository.GetByIdAsync(id);
