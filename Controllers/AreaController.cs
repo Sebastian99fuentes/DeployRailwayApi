@@ -54,8 +54,7 @@ namespace ApiDeployReservas.Controllers
         }
 
         [HttpPost("create-area")]
-
-       
+        [Authorize]
         public async Task<IActionResult> Create([FromBody] CreateAreaRequestDto AreaDto)
         {
 
@@ -69,7 +68,7 @@ namespace ApiDeployReservas.Controllers
         }
 
         [HttpPut]
-        
+        [Authorize]
         [Route("Update-areas/{id:guid}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] CreateAreaRequestDto Area)
         {
@@ -90,7 +89,7 @@ namespace ApiDeployReservas.Controllers
         }
 
         [HttpDelete]
-        
+        [Authorize]
         [Route("Delete-areas/{id:guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
