@@ -119,12 +119,18 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// Habilita políticas de CORS.
-app.UseCors(x => x
-    .AllowAnyOrigin() // Permite solicitudes desde cualquier origen.
-    .AllowAnyMethod() // Permite cualquier método HTTP (GET, POST, etc.).
-    .AllowAnyHeader()); // Permite cualquier encabezado.
-
+//// Habilita políticas de CORS.
+//app.UseCors(x => x
+//    .AllowAnyOrigin() // Permite solicitudes desde cualquier origen.
+//    .AllowAnyMethod() // Permite cualquier método HTTP (GET, POST, etc.).
+//    .AllowAnyHeader()); // Permite cualquier encabezado.
+app.UseCors(builder =>
+{
+    builder.WithOrigins("https://deploy-vercer-front.vercel.app") // URL del frontend
+           .AllowAnyHeader()
+           .AllowAnyMethod()
+           .AllowCredentials(); // Permitir credenciales (cookies, tokens)
+});
 
 app.UseHttpsRedirection();
 
